@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Customer Dashboard - PES Pharmacy{%
+endblock %} {% block content %}
+<h2 class="mb-4">Customer Dashboard</h2>
+
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Your Recent Orders</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Subtotal</th>
+                <th>Customer ID</th>
+                <th>Seller ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in recent_orders %}
+              <tr>
+                <td>{{ order.order_id }}</td>
+                <td>{{ order.product_id }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>${{ "%.2f"|format(order.unit_price) }}</td>
+                <td>${{ "%.2f"|format(order.subtotal) }}</td>
+                <td>{{ order.customer_id }}</td>
+                <td>{{ order.seller_id }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4">
+          <a href="{{ url_for('orders') }}" class="btn btn-primary">
+            <i class="fas fa-shopping-cart"></i> Place New Order
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

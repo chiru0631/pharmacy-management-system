@@ -1,0 +1,118 @@
+{% extends "base.html" %} {% block title %}Register Seller - PES Pharmacy{%
+endblock %} {% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Seller Registration</h2>
+        <form
+          method="POST"
+          action="{{ url_for('register_seller') }}"
+          class="row g-3"
+        >
+          <div class="col-md-6">
+            <label for="seller_id" class="form-label">Seller ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="seller_id"
+              name="seller_id"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="company_name" class="form-label">Company Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="company_name"
+              name="company_name"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="license_number" class="form-label"
+              >License Number</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="license_number"
+              name="license_number"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              name="phone"
+              required
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+
+          <div class="col-12">
+            <label for="address" class="form-label">Address</label>
+            <textarea
+              class="form-control"
+              id="address"
+              name="address"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status" required>
+              <option value="">Choose...</option>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          </div>
+        </form>
+        <div class="text-center mt-3">
+          <p>
+            Already have an account?
+            <a href="{{ url_for('login') }}">Login here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block title %}500 - Server Error{% endblock %} {%
+block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="display-1 text-muted">500</h1>
+        <h3 class="mb-4">Internal Server Error</h3>
+        <p class="mb-4">
+          Something went wrong on our end. Please try again later or contact
+          support if the problem persists.
+        </p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary">
+          <i class="fas fa-home me-2"></i>Return to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

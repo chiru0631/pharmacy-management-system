@@ -1,0 +1,99 @@
+{% extends "base.html" %} {% block title %}Orders - PES Pharmacy{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Place New Order</h2>
+
+  <h3 class="mb-4">Products List</h3>
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p><strong>Manufacturer:</strong> {{ product.manufacturer }}</p>
+          <p><strong>Expiry Date:</strong> {{ product.exp_date }}</p>
+          <p>
+            <strong>Unit Price:</strong> ${{ "%.2f"|format(product.unit_price)
+            }}
+          </p>
+          <p><strong>Stock Quantity:</strong> {{ product.stock_quantity }}</p>
+          <p><strong>Seller ID:</strong> {{ product.seller_id }}</p>
+          <form method="POST" action="{{ url_for('add_to_cart') }}">
+            <input
+              type="hidden"
+              name="product_id"
+              value="{{ product.product_id }}"
+            />
+            <input
+              type="hidden"
+              name="unit_price"
+              value="{{ product.unit_price }}"
+            />
+            <input
+              type="hidden"
+              name="seller_id"
+              value="{{ product.seller_id }}"
+            />
+            <div class="mb-3">
+              <label for="quantity" class="form-label">Quantity</label>
+              <input
+                type="number"
+                class="form-control"
+                id="quantity"
+                name="quantity"
+                min="1"
+                max="{{ product.stock_quantity }}"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <h3 class="mb-4">Your Cart</h3>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Subtotal</th>
+          <th>Seller ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+        <tr>
+          <td>{{ item.product_id }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>${{ "%.2f"|format(item.unit_price) }}</td>
+          <td>${{ "%.2f"|format(item.subtotal) }}</td>
+          <td>{{ item.seller_id }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-4">
+    <form method="POST" action="{{ url_for('process_order') }}">
+      <div class="mb-3">
+        <label for="shipping_address" class="form-label"
+          >Shipping Address (Optional)</label
+        >
+        <textarea
+          class="form-control"
+          id="shipping_address"
+          name="shipping_address"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

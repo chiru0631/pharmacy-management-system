@@ -1,0 +1,101 @@
+{% extends "base.html" %} {% block title %}Home - PES Pharmacy{% endblock %} {%
+block content %}
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body text-center">
+        <h1 class="display-4">Welcome to PES Pharmacy</h1>
+        <p class="lead">Your trusted partner in healthcare</p>
+        <!-- Added login and registration buttons -->
+        <div class="d-flex justify-content-center gap-2 mt-4">
+          <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+          <a
+            href="{{ url_for('register_customer') }}"
+            class="btn btn-outline-primary"
+            >Register as Customer</a
+          >
+          <a
+            href="{{ url_for('register_seller') }}"
+            class="btn btn-outline-success"
+            >Register as Seller</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <i class="fas fa-pills fa-3x mb-3 text-primary"></i>
+        <h3>Quality Medicines</h3>
+        <p>We provide high-quality medicines from trusted manufacturers.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <i class="fas fa-shipping-fast fa-3x mb-3 text-success"></i>
+        <h3>Fast Delivery</h3>
+        <p>Quick and reliable delivery to your doorstep.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body text-center">
+        <i class="fas fa-user-md fa-3x mb-3 text-info"></i>
+        <h3>Expert Support</h3>
+        <p>24/7 support from our qualified pharmacists.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="text-center mb-4">Why Choose Us?</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li>
+                <i class="fas fa-check-circle text-success me-2"></i>Wide range
+                of medicines
+              </li>
+              <li>
+                <i class="fas fa-check-circle text-success me-2"></i>Competitive
+                prices
+              </li>
+              <li>
+                <i class="fas fa-check-circle text-success me-2"></i>Genuine
+                products
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li>
+                <i class="fas fa-check-circle text-success me-2"></i
+                >Professional service
+              </li>
+              <li>
+                <i class="fas fa-check-circle text-success me-2"></i>Secure
+                transactions
+              </li>
+              <li>
+                <i class="fas fa-check-circle text-success me-2"></i>Easy
+                ordering process
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

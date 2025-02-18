@@ -1,0 +1,105 @@
+{% extends "base.html" %} {% block title %}Analytics - PES Pharmacy{% endblock
+%} {% block content %}
+<div class="row">
+  <div class="col-12">
+    <h2 class="mb-4">Analytics Dashboard</h2>
+  </div>
+
+  <!-- Category Statistics -->
+  <div class="col-12 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Category Statistics</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Products</th>
+                <th>Total Stock</th>
+                <th>Average Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for stat in category_stats %}
+              <tr>
+                <td>{{ stat.category }}</td>
+                <td>{{ stat.product_count }}</td>
+                <td>{{ stat.total_stock }}</td>
+                <td>${{ "%.2f"|format(stat.avg_price) }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Products -->
+  <div class="col-md-6 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Top Selling Products</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Seller</th>
+                <th>Product</th>
+                <th>Orders</th>
+                <th>Quantity Sold</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product in top_products %}
+              <tr>
+                <td>{{ product.company_name }}</td>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.times_ordered }}</td>
+                <td>{{ product.total_quantity_sold }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sales Trends -->
+  <div class="col-md-6 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Sales Trends</h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Orders</th>
+                <th>Total Sales</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for trend in sales_trends %}
+              <tr>
+                <td>{{ trend.month }}</td>
+                <td>{{ trend.order_count }}</td>
+                <td>${{ "%.2f"|format(trend.total_sales) }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends "base.html" %} {% block title %}Seller Dashboard{% endblock %} {%
+block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Seller Dashboard</h1>
+
+  <h2 class="mt-5 mb-3">Recent Orders</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Subtotal</th>
+          <th>Customer ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if recent_orders %} {% for order in recent_orders %}
+        <tr>
+          <td>{{ order.order_date }}</td>
+          <td>{{ order.product_name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>${{ "%.2f"|format(order.unit_price) }}</td>
+          <td>${{ "%.2f"|format(order.subtotal) }}</td>
+          <td>{{ order.customer_id }}</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="6" class="text-center">No recent orders</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-5 mb-3">Low Stock Products</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Stock Quantity</th>
+          <th>Min Stock Level</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if low_stock_products %} {% for product in low_stock_products %}
+        <tr>
+          <td>{{ product.product_id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.stock_quantity }}</td>
+          <td>{{ product.min_stock_level }}</td>
+          <td>{{ product.status }}</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="5" class="text-center">No low stock products</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-5 mb-3">Sales Summary</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Total Products</th>
+          <th>Available Products</th>
+          <th>Low Stock Products</th>
+          <th>Out of Stock Products</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ product_stats.total_products }}</td>
+          <td>{{ product_stats.available_products }}</td>
+          <td>{{ product_stats.low_stock_products }}</td>
+          <td>{{ product_stats.out_of_stock_products }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-5 mb-3">Products with Sales Above Average</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Total Sales</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if products_above_average_sales %} {% for product in
+        products_above_average_sales %}
+        <tr>
+          <td>{{ product.product_id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.total_sales }}</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td colspan="3" class="text-center">
+            No products with sales above average
+          </td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="mt-5 mb-3">Sales Summary by Seller</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Seller ID</th>
+          <th>Company Name</th>
+          <th>Total Orders</th>
+          <th>Total Items Sold</th>
+          <th>Total Revenue</th>
+          <th>Average Unit Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if sales_summary %}
+        <tr>
+          <td>{{ sales_summary.seller_id }}</td>
+          <td>{{ sales_summary.company_name }}</td>
+          <td>{{ sales_summary.total_orders }}</td>
+          <td>{{ sales_summary.total_items_sold }}</td>
+          <td>${{ "%.2f"|format(sales_summary.total_revenue) }}</td>
+          <td>${{ "%.2f"|format(sales_summary.average_unit_price) }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6" class="text-center">No sales summary available</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
