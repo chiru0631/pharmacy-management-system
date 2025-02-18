@@ -28,5 +28,3 @@ The **PESU Pharmaceutical Database Management System** is a web-based platform d
 - **Authentication**: Flask-Login  
 - **Frontend**: Jinja2 (templating)  
 - **Security**: Password hashing, session handling  
-
-## 📂 Project Structure
